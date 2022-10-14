@@ -2,6 +2,7 @@ package ckpt1;
 
 import cse332.interfaces.worklists.FixedSizeFIFOWorkList;
 import datastructures.worklists.CircularArrayFIFOQueue;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 
@@ -93,9 +94,13 @@ public class YourOwnCircularArrayFIFOQueueTests {
     @Test()
     @Timeout(value = 5, unit = TimeUnit.SECONDS)
     public void test_size_afterInsertion_incrementsByOne() {
-        CircularArrayFIFOQueue<Integer> queue = new CircularArrayFIFOQueue<>(5);
-        // Implement this test!
-        fail();
+        int MAX_CAPACITY = 3;
+        CircularArrayFIFOQueue<Integer> q = new CircularArrayFIFOQueue<>(MAX_CAPACITY);
+
+        q.add(1);
+        assertEquals(q.size(), 1);
+        q.add(3);
+        assertEquals(q.size(), 2);
     }
 
     /**
@@ -104,9 +109,16 @@ public class YourOwnCircularArrayFIFOQueueTests {
     @Test()
     @Timeout(value = 5, unit = TimeUnit.SECONDS)
     public void test_add_isFull_throwsException() {
-        CircularArrayFIFOQueue<Integer> queue = new CircularArrayFIFOQueue<>(5);
-        // Implement this test!
-        fail();
+        int MAX_CAPACITY = 3;
+        CircularArrayFIFOQueue<Integer> q = new CircularArrayFIFOQueue<>(MAX_CAPACITY);
+
+        q.add(1);
+        q.add(2);
+        q.add(3);
+        assertThrows(IllegalStateException.class, () -> {
+            q.add(4);
+        });
+
     }
 
     /**
@@ -123,8 +135,19 @@ public class YourOwnCircularArrayFIFOQueueTests {
     @Timeout(value = 5, unit = TimeUnit.SECONDS)
     public void test_addNext_cyclesEntireQueue_returnsCorrect() {
         CircularArrayFIFOQueue<Integer> queue = new CircularArrayFIFOQueue<>(5);
-        // Implement this test!
-        fail();
+
+        queue.add(1);
+        queue.add(2);
+        queue.add(3);
+        queue.add(4);
+        queue.add(5);
+
+        for(int i = 0; i < 5; i++) {
+            queue.next();
+        }
+
+        queue.add(10);
+        assertEquals(queue.next(), 10);
     }
 
 }
