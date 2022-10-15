@@ -2,8 +2,6 @@ package datastructures.worklists;
 
 import cse332.exceptions.NotYetImplementedException;
 import cse332.interfaces.worklists.FixedSizeFIFOWorkList;
-
-import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 /**
